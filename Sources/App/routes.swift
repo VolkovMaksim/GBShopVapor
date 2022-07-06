@@ -9,6 +9,14 @@ func routes(_ app: Application) throws {
     app.get("hello") { req -> String in
         return "Hello, world!"
     }
+    
+    let controllerAuth = AuthController()
+    // при запросе на url "register" будет использован класс AuthController - метод register
+    app.post("register", use: controllerAuth.register)
+    
+    let controllerSale = SaleController()
+    // при запросе на url "sale" будет использован класс SaleController - метод sale
+    app.post("sale", use: controllerSale.sale)
 
     try app.register(collection: TodoController())
 }
